@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Turbo Circuit</title>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Chakra+Petch:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css"></head><body>
+<div id="stage"><canvas id="c"></canvas></div>
+<button id="mute" title="Sonido">🔊</button>
+<div id="ctl" class="hide">
+ <div><div class="pad" id="bL">◀</div><div class="pad" id="bR">▶</div></div>
+ <div class="pad" id="bZ">⏸</div>
+ <div><div class="pad" id="bB">⏹</div><div class="pad" id="nit">⚡</div></div>
+</div>
+<div id="home" class="ov glass">
+ <div class="coins">💰 <span id="c1">0</span> · <span id="lvl"></span></div><div class="xbar"><i id="xfill"></i></div>
+ <h1>Turbo Circuit</h1>
+ <p class="sub">Arcade de carreras · 8 países · 5 autos</p>
+ <canvas id="pv" width="300" height="130" style="width:min(300px,60vw);height:auto"></canvas>
+ <div class="menugrid">
+  <button class="opt bigopt" data-play="1">▶ Jugar</button>
+  <button class="opt" data-play="0">🏆 Campeonato</button>
+  <button class="opt" data-play="2">⏱ Contrarreloj</button>
+  <button class="opt" data-go="garage">🔧 Garaje</button>
+  <button class="opt" data-go="sov">📊 Estadísticas</button>
+  <button class="opt" data-go="aov">🏅 Logros</button>
+  <button class="opt" id="setb">⚙ Ajustes</button>
+ </div>
+</div>
+<div id="menu" class="ov hide">
+ <div class="topbar"><button class="opt" data-go="home">← Volver</button><div class="coins">💰 <span id="c2">0</span></div></div>
+ <h1 style="font-size:30px" id="mt">Carrera</h1>
+ <div class="row" id="modes"></div>
+ <div class="lbl">Dificultad</div><div class="row" id="df"></div>
+ <div class="lbl">Vueltas</div><div class="row" id="lp"></div>
+ <div class="lbl">Clima</div><div class="row" id="wxr"></div>
+ <div class="lbl">Neumáticos</div><div class="row" id="tyr"></div>
+ <div class="lbl">Circuito</div><div class="row" id="cs"></div>
+ <div class="lbl">Tu auto</div><div class="row" id="cur"></div>
+ <p class="sub" id="hint" style="min-height:1.2em"></p>
+ <button class="big" id="go">Correr</button>
+</div>
+<div id="garage" class="ov hide">
+ <div class="topbar"><button class="opt" data-go="home">← Volver</button><div class="coins">💰 <span id="c3">0</span></div></div>
+ <h1 style="font-size:30px">Garaje</h1>
+ <canvas id="pv2" width="360" height="180" style="width:min(360px,86vw);height:auto;touch-action:none"></canvas>
+ <p class="sub" style="font-size:12px;margin:0">Arrastra para girar el auto</p>
+ <div id="stats"></div>
+ <div class="row" id="cars"></div>
+ <div class="lbl">Pintura</div><div class="row" id="paint"></div>
+ <div class="row" id="up"></div>
+</div>
+<div id="sov" class="ov hide">
+ <div class="topbar"><button class="opt" data-go="home">← Volver</button></div>
+ <h1 style="font-size:30px">Estadísticas</h1>
+ <div id="sbody" style="width:min(420px,92vw);text-align:left;font-size:14px"></div>
+ <div class="row"><button class="opt" id="rst">Reiniciar progreso</button></div>
+</div>
+<div id="aov" class="ov hide">
+ <div class="topbar"><button class="opt" data-go="home">← Volver</button><div class="coins" id="acnt"></div></div>
+ <h1 style="font-size:30px">Logros</h1>
+ <div id="abody" style="width:min(440px,92vw);text-align:left"></div>
+</div>
+<div id="pause" class="ov hide">
+ <h1 style="font-size:34px" id="pt">Pausa</h1>
+ <div style="width:min(340px,90vw);display:grid;gap:8px;text-align:left;font-size:14px">
+  <label>Música <input type="range" id="sMus" min="0" max="100" style="width:100%"></label>
+  <label>Motor <input type="range" id="sEng" min="0" max="100" style="width:100%"></label>
+  <label>Efectos <input type="range" id="sSfx" min="0" max="100" style="width:100%"></label>
+  <div class="row" id="trow"></div>
+  <div class="row" id="qrow"></div>
+  <div class="row"><button class="opt" id="fsb">⛶ Pantalla completa</button></div>
+ </div>
+ <div class="row" id="pb"></div>
+ <p class="sub" style="font-size:12px">◀ ▶ girar · ⏹ frenar · ⚡ nitro · Esc o P para pausar</p>
+</div>
+<div id="res" class="ov hide"></div>
+<canvas id="cf" class="hide"></canvas>
+<div id="achb"></div>
+<div id="rot" class="hide">📱 Gira tu móvil en horizontal para jugar</div>
+<div id="rp" class="hide"><div class="rpbar"><button class="pad rb" id="rPlay">⏸</button><input type="range" id="rSeek" min="0" max="1000" value="0"><button class="pad rb" id="rSp">1×</button><button class="pad rb" id="rCam">🎥</button><button class="pad rb" id="rH">↕</button><button class="pad rb" id="rX">✖</button></div></div>
+<script src="js/01-datos.js"></script>
+<script src="js/02-audio.js"></script>
+<script src="js/03-menu.js"></script>
+<script src="js/04-carrera.js"></script>
+<script src="js/05-dibujo.js"></script>
+<script src="js/06-controles.js"></script>
+<script src="js/07-bucle.js"></script>
+</body></html>
